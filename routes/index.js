@@ -11,8 +11,6 @@ router.get('/users/:id', userController.getUsersById);
 //Routes to create a new user
 router.post('/users', userController.createUser);
 
- 
-
 //Route to edit a user
 router.put('/users', userController.updateUser)
 
