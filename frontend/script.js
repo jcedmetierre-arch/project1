@@ -9,7 +9,9 @@ submit.addEventListener("click", () => {
     let lname = document.querySelector("#lname").value;
     let email = document.querySelector("#email").value;
     let gender = document.querySelector("#gender").value;
-    let formData = { fname, lname, email, gender };
+    let ip_address = document.querySelector("#ip_address").value;
+    // Use ip_address instead of address
+    let formData = { fname, lname, email, gender, ip_address };
 
     fetch("http://localhost:5000/api/users", {
         method: "POST",
@@ -64,6 +66,11 @@ function getUsers(){
                         ${element.gender}
                     </span>
                 </td>
+                <td>
+                    <span class="text-dark">
+                        <i class="bi bi-geo-alt me-1 text-muted"></i>${element.ip_address}
+                    </span>
+                </td>
                 <td class="text-center">
                     <button class="btn btn-sm btn-outline-warning me-2" onclick="searchMember(${element.id})" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -82,7 +89,7 @@ function getUsers(){
         content.innerHTML = `
             <tr>
                 <td colspan="5" class="text-center py-4 text-muted">
-                    <i class="bi bi-exclamation-circle display-6 d-block mb-2"></i>
+                    <i class="bi bi-exclamation-circle display-7 d-block mb-2"></i>
                     No records found or server not running
                 </td>
             </tr>`;
@@ -115,6 +122,7 @@ function searchMember(id){
     document.querySelector('#lname').value=data[0].last_name;
     document.querySelector('#email').value=data[0].email;
     document.querySelector('#gender').value=data[0].gender;
+    document.querySelector('#ip_address').value=data[0].ip_address;
     document.querySelector('#ID').value=data[0].id;
     
     // Scroll to form
@@ -130,8 +138,9 @@ update.addEventListener(`click`,()=>{
   let lname = document.querySelector("#lname").value;
   let email = document.querySelector("#email").value;
   let gender = document.querySelector("#gender").value;
+  let ip_address = document.querySelector("#ip_address").value;
   let ID = document.querySelector("#ID").value;
-  let formData = {fname, lname, email, gender, id:ID};
+  let formData = {fname, lname, email, gender, ip_address, id:ID};
 
   if(confirm("Are you sure you want to update this user?")){
       fetch(`http://localhost:5000/api/users`,{
